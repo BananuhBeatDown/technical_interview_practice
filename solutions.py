@@ -137,21 +137,21 @@ def question3(G):
     min_span_value = 0
     key_values = []
     
-    for values in G.values():
+    for values in G.values(): # get all values from all keys in one place
         key_values += values
     
     for key in G.keys():
         # print(key)
-        temp = 0
+        temp = 0 # temp value to hold span value
         for value in key_values:
             if key in value:
-                if temp == 0:
+                if temp == 0: # if no value assigned to temp, assign here
                     temp = value[1]
                     # print(temp)
-                elif value[1] < temp:
+                elif value[1] < temp: # if value is less than current temp value replace it
                     temp = value[1]
                     # print(temp)    
-        min_span_value += temp
+        min_span_value += temp # add key temp value to minimum span value 
     return min_span_value
                                              
 
