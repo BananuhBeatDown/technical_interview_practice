@@ -291,3 +291,79 @@ print(question4(test_matrix, 3, 2, 5))
 test_matrix = [[]]
 print(question4(test_matrix, 3, 2, 5))
 # None
+
+# %%
+
+# Question 5
+# Find the elemnet in a singly linked list that's `m` elements from the end.
+# For example, if a linked list has 5 elements, the 3rd element from the end
+# is the 3rd element. The function definition should look like `question5(ll, m)`,
+# where `ll` is the first node of a linked list and `m` is the "mth number from
+# the end". Return the value of the node at that position.
+
+
+class Node(object): # create the node object
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList(object): # create a linked list object
+    def __init__(self, head=None):
+        self.head = head
+        
+    def append(self, new_node): # add a method to add item to end of list
+        current = self.head
+        if self.head:
+            while current.next:
+                current = current.next
+            current.next = new_node
+        else:
+            self.head = new_node
+            
+    def get_position(self, position): # return node value from requested position in list 
+        counter = 1
+        current = self.head
+        if position < 1 or position > ll.get_len():
+            return None
+        while counter <= position:
+            if counter == position:
+                return current.data
+            current = current.next
+            counter += 1
+        return None
+    
+    def get_len(self): # return length of list
+        counter = 1
+        current = self.head
+        while current.next != None:
+            current = current.next
+            counter += 1
+        return counter
+
+
+def question5(ll, m):
+    if m <= ll.get_len() and m > -1: # check if m is out of index of or a negative number
+        return ll.get_position(ll.get_len() - m + 1)
+    return None       
+
+
+n1 = Node(1)
+n2 = Node(2)
+n3 = Node(3)
+n4 = Node(4)
+
+ll = LinkedList(n1)
+ll.append(n2)
+ll.append(n3)
+ll.append(n4)
+
+
+print(question5(ll, 2))
+# 2
+
+print(question5(ll, 5))
+# None
+
+print(question5(ll, 4))
+# 4
