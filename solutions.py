@@ -217,7 +217,7 @@ test_matrix = [[0, 1, 0, 0, 0],
                [1, 0, 0, 0, 1],
                [0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 1, 4))
-
+# 3
 
 test_matrix = [[0, 0, 0, 0, 0],
                [0, 0, 0, 0, 0],
@@ -225,6 +225,7 @@ test_matrix = [[0, 0, 0, 0, 0],
                [0, 0, 0, 0, 0],
                [0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 1, 4))
+# None
 
 
 test_matrix = [[0, 0, 0, 0, 0],
@@ -233,6 +234,7 @@ test_matrix = [[0, 0, 0, 0, 0],
                [0, 1, 0, 0, 0],
                [0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 1, 4))        
+# None
 
 
 test_matrix = [[0, 0, 0, 0, 0],
@@ -241,6 +243,7 @@ test_matrix = [[0, 0, 0, 0, 0],
                [0, 1, 0, 0, 0],
                [0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 0, 4))
+# 1
 
 
 test_matrix = [[0, 0, 0, 0, 1],
@@ -249,6 +252,7 @@ test_matrix = [[0, 0, 0, 0, 1],
                [0, 1, 0, 0, 0],
                [0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 0, 4))
+# 1
 
 
 test_matrix = [[0, 0, 0, 0, 1],
@@ -257,6 +261,7 @@ test_matrix = [[0, 0, 0, 0, 1],
                [0, 1, 0, 0, 0],
                [0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 0, 4))
+# 1
 
 
 test_matrix = [[0, 0, 0, 0, 1],
@@ -265,6 +270,7 @@ test_matrix = [[0, 0, 0, 0, 1],
                [0, 1, 0, 0, 0],
                [0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 0, 4))
+# None
 
 
 test_matrix =   [[0, 0, 0, 0, 0, 0],
@@ -274,11 +280,14 @@ test_matrix =   [[0, 0, 0, 0, 0, 0],
                  [0, 0, 1, 0, 0, 1],
                  [0, 0, 0, 0, 0, 0]]
 print(question4(test_matrix, 3, 2, 5))
+# 1
 
 
 test_matrix = []
 print(question4(test_matrix, 3, 2, 5))
+# None
 
 
 test_matrix = [[]]
 print(question4(test_matrix, 3, 2, 5))
+# None
