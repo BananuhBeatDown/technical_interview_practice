@@ -160,3 +160,125 @@ test_dict = {'A': [('B', 2)],
              'C': [('B', 5)]}
 print(question3(test_dict))
 
+# %%
+
+# Question 4
+# Find the least common ancestor between two nodes on a binary search tree.
+# The least common ancestor is the farthest node from the root that is an
+# ancestor of both nodes. For example, the root is a common ancestor. You
+# can assume that both nodes are in the tree, and the tree itself adheres
+# to all BST properties. The function definition should look like
+# `question4(T, r, n1, n2)`, where `T` is the tree represented as a matrix,
+# where the index of the list is equal to the integer stored in that node and
+# and a `1` representing a child node, `r` is a non-negative integer
+# representing the root, and `n1` and `n2` are non-negative integers
+# representing the two nodes in no particular order.
+
+
+def question4(T, r, n1, n2):
+    if T and T[0]:
+        if sum(T[r]) == 1:
+              if T[r][n1] or T[r][n2]:
+                  return None
+              return question4(T, T[r].index(1), n1, n2)
+        else: 
+            if question4one(T, r, n1) and question4one(T, r , n2):
+                return r
+        return None
+
+
+def question4one(T, r, n): # Test to see if n is in branch
+    if sum(T[r]): 
+        if T[r][n]: # if branch is in initial node return r and were done
+            return r
+        else:
+            if sum(T[r]) == 1: # if only one branch run recursive step
+                try:
+                    if question4one(T, T[r].index(1), n) > -1:
+                        return r
+                except: # if branch node is empty return none
+                    return None
+            else: # if two branches in recursive step try first branch then second if first fails
+                try:
+                    if question4one(T, T[r].index(1), n) > -1:
+                        return r
+                except:
+                    try:
+                        if question4one(T, T[r].index(1, 2), n) > -1:
+                            return r
+                    except: # if second fails return none
+                        return None
+    return None
+
+
+test_matrix = [[0, 1, 0, 0, 0],
+               [0, 0, 0, 0, 0],
+               [0, 0, 0, 0, 0],
+               [1, 0, 0, 0, 1],
+               [0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 1, 4))
+
+
+test_matrix = [[0, 0, 0, 0, 0],
+               [0, 0, 0, 0, 0],
+               [0, 0, 0, 0, 0],
+               [0, 0, 0, 0, 0],
+               [0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 1, 4))
+
+
+test_matrix = [[0, 0, 0, 0, 0],
+               [1, 0, 0, 0, 1],
+               [0, 0, 0, 0, 0],
+               [0, 1, 0, 0, 0],
+               [0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 1, 4))        
+
+
+test_matrix = [[0, 0, 0, 0, 0],
+               [1, 0, 0, 0, 1],
+               [0, 0, 0, 0, 0],
+               [0, 1, 0, 0, 0],
+               [0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 0, 4))
+
+
+test_matrix = [[0, 0, 0, 0, 1],
+               [1, 0, 0, 1, 0],
+               [0, 0, 0, 0, 0],
+               [0, 1, 0, 0, 0],
+               [0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 0, 4))
+
+
+test_matrix = [[0, 0, 0, 0, 1],
+               [0, 0, 1, 1, 0],
+               [1, 0, 0, 0, 0],
+               [0, 1, 0, 0, 0],
+               [0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 0, 4))
+
+
+test_matrix = [[0, 0, 0, 0, 1],
+               [0, 0, 1, 1, 0],
+               [0, 0, 0, 0, 0],
+               [0, 1, 0, 0, 0],
+               [0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 0, 4))
+
+
+test_matrix =   [[0, 0, 0, 0, 0, 0],
+                 [1, 0, 0, 0, 1, 0],
+                 [0, 0, 0, 0, 0, 0],
+                 [0, 1, 0, 0, 0, 0],
+                 [0, 0, 1, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 0]]
+print(question4(test_matrix, 3, 2, 5))
+
+
+test_matrix = []
+print(question4(test_matrix, 3, 2, 5))
+
+
+test_matrix = [[]]
+print(question4(test_matrix, 3, 2, 5))
