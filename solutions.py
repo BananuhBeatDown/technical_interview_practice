@@ -159,6 +159,21 @@ test_dict = {'A': [('B', 2)],
              'B': [('A', 2), ('C', 5)],
              'C': [('B', 5)]}
 print(question3(test_dict))
+# 9
+
+
+test_dict = {}
+
+
+print(question3(test_dict))
+# 0
+
+
+test_dict = {'A': [('B', 5), ('C', 2)],
+             'B': [('A', 2), ('C', 5)],
+             'C': [('A', 5), ('B', 2)]}
+print(question3(test_dict))
+# 6
 
 # %%
 
@@ -324,7 +339,7 @@ class LinkedList(object): # create a linked list object
     def get_position(self, position): # return node value from requested position in list 
         counter = 1
         current = self.head
-        if position < 1 or position > ll.get_len():
+        if position < 1 or position > ll.get_len(): # check for real position and not out of list index
             return None
         while counter <= position:
             if counter == position:
@@ -334,9 +349,9 @@ class LinkedList(object): # create a linked list object
         return None
     
     def get_len(self): # return length of list
-        counter = 1
+        counter = 1 # start count at 1 not 0
         current = self.head
-        while current.next != None:
+        while current.next != None:  # when current.next is not none return current
             current = current.next
             counter += 1
         return counter
