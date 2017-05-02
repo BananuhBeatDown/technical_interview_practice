@@ -94,7 +94,7 @@ def question2(a):
                 return a[0] + question2(a[1:-1]) + a[-1] # if so, add the character before and after recursion to capture the entire palindrome 
             else:
                 return question2(a[1:]) # if not, repeat process using string starting one position from the right
-    return None
+    return
 
 
 test_a = ''
@@ -225,7 +225,7 @@ def question4one(T, r, n): # Test to see if n is in branch
                     if question4one(T, T[r].index(1), n) > -1:
                         return r
                 except: # if branch node is empty return none
-                    return None
+                    return
             else: # if two branches in recursive step try first branch then second if first fails
                 try:
                     if question4one(T, T[r].index(1), n) > -1:
@@ -235,8 +235,8 @@ def question4one(T, r, n): # Test to see if n is in branch
                         if question4one(T, T[r].index(1, 2), n) > -1:
                             return r
                     except: # if second fails return none
-                        return None
-    return None
+                        return
+    return
 
 
 test_matrix = [[0, 1, 0, 0, 0],
@@ -354,18 +354,18 @@ class LinkedList(object): # create a linked list object
         counter = 1
         current = self.head
         if position < 1 or position > ll.get_len(): # check for real position and not out of list index
-            return None
+            return
         while counter <= position:
             if counter == position:
                 return current.data
             current = current.next
             counter += 1
-        return None
+        return
     
     def get_len(self): # return length of list
         counter = 1 # start count at 1 not 0
         current = self.head
-        while current.next != None:  # when current.next is not none return current
+        while current.next:  # when current.next is not none return current
             current = current.next
             counter += 1
         return counter
@@ -376,7 +376,7 @@ def question5(ll, m):
         if ll.get_len() - m == 0:
             return ll.head.data
         return ll.get_position(ll.get_len() - m + 1)
-    return None       
+    return      
 
 
 n1 = Node(1)
