@@ -330,6 +330,7 @@ print(question4(test_matrix, 3, 2, 5))
 # the end". Return the value of the node at that position.
 
 
+
 class Node(object): # create the node object
     def __init__(self, data):
         self.data = data
@@ -372,6 +373,8 @@ class LinkedList(object): # create a linked list object
 
 def question5(ll, m):
     if m <= ll.get_len() and m > -1: # check if m is out of index of or a negative number
+        if ll.get_len() - m == 0:
+            return ll.head.data
         return ll.get_position(ll.get_len() - m + 1)
     return None       
 
@@ -386,12 +389,23 @@ ll.append(n2)
 ll.append(n3)
 ll.append(n4)
 
+print(ll.get_len())
+# 4
+
+print(ll.get_position(3))
+# 3
 
 print(question5(ll, 2))
+# 3
+
+print(question5(ll, 3))
 # 2
 
 print(question5(ll, 5))
 # None
 
-print(question5(ll, 4))
+print(question5(ll, 1))
 # 4
+
+print(question5(ll, 4))
+# 1
