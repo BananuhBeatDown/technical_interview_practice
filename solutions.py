@@ -14,16 +14,16 @@ Created on Wed Apr 26 13:40:27 2017
 
 
 def question1(s, t):
-    if t and s:
-        if len(t) >= 2:
-            while len(s) >= len(t):
-                a = 0
-                for j in set(t):
-                    if t.count(j) == s[:len(t)].count(j):
-                        a += t.count(j)
-                if a == len(t):
+    if t and s: # Not empty?
+        if len(t) >= 2: # no one letter palindromes
+            while len(s) >= len(t): # t is subset of s
+                verify = 0 
+                for c in set(t): # only unique characters
+                    if t.count(c) == s[:len(t)].count(c): # compare char counts between t and s snippet
+                        verify += t.count(c) # Add the char count to verify if t same char count as s
+                if verify == len(t): # if all characters match verfiy and len(t) will be the same size
                     return True
-                s = s[1:]
+                s = s[1:] # if not palindrome try again with the next iteration of s one char forward
     return False
 
 test_S = 'bccbba'
