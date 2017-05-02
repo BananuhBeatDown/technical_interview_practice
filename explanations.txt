@@ -14,7 +14,7 @@ I used for and if loops to determine the minimum spanning tree. Since each node 
 
 
 Question 4:
-I used a recurive solution because the problem requires diving down different paths of the matrix using original function in multiple situations. I started with a helper function that would determine if a single node was a common ancestor then used that function to build the comparision. The worst time scenario would be O(n) since every row of the matrix would have to be checked, but none of them twice. No new variables are created so the space remains the same.
+I used a recurive solution because the problem required diving down different paths of the matrix using the original function in multiple situations. I started with a helper function determined if a single node was a common ancestor then used that function to build the comparision. The worst time scenario would be O(n) since every row of the matrix would have to be checked, but none of them twice. No new variables are created so the space remains the same.
 
 
 Question 5:
