@@ -7,3 +7,5 @@ I used a while loop instead of a recursive solution since it simplified the prob
 Question 2:
 I used a recusive solution. It seemed like this is a situation where the processing time wouldn't be exponentially increased by recursion since n was continuously being reduced by either one or two characters each iteration while only checking if the first and last characters matched. The worst case scenario would be O(n) and space would be nil since no new variables were created.
 
+Question 3:
+I used for and if loops to determine the minimum spanning tree. Since each node was certain to link to at least one of the other nodes it seemed easiest to make a list of all the dictionary value touples and search for the minimum value correlated with that key. The time to look through the list will take O(n) since all values for all key will be checked. A list of tuples the length of all the individual values will be created as well as intergers to hold the minimum span value and the temporary value to add to the minimum span value. 
