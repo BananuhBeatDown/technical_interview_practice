@@ -15,21 +15,16 @@ Created on Wed Apr 26 13:40:27 2017
 
 def question1(s, t):
     if t and s:
-        if len(t) <= len(s):
-            if len(t) >= 2: 
-                for p in permutations(t):
-                    if p in s:
-                        return True
-                return False
-                        
-def permutations(s):
-    if len(s) == 1:
-        return s
-    recursive_perms = set()
-    for c in s:
-        for perm in permutations(s.replace(c,'',1)):
-            recursive_perms.add(c+perm)
-    return recursive_perms
+        if len(t) >= 2:
+            while len(s) >= len(t):
+                a = 0
+                for j in set(t):
+                    if t.count(j) == s[:len(t)].count(j):
+                        a += t.count(j)
+                if a == len(t):
+                    return True
+                s = s[1:]
+    return False
 
 test_S = 'bccbba'
 test_T = 'abc'
@@ -79,27 +74,7 @@ print(question1(test_S, test_T))
 test_S = 'u'
 test_T = 'ud'
 print(question1(test_S, test_T))
-
-
-# %%
-
-def question1(s, t):
-    index = {}
-    if t and s:
-        if len(t) <= len(s):
-            if len(t) >= 2:
-                for i in set(t):
-                    if i not in s:
-                        return False
-                    else:
-                        index[i] = s.count(i)
-                return index
-    return False
-                         
-
-test_S = 'bccbba'
-test_T = 'abc'
-print(question1(test_S, test_T))
+# False
 
 # %%
 
