@@ -1,5 +1,9 @@
 Your paragraph should provide your reasoning behind decisions made in the code. For example, why did you use that data structure? You also need to explain the efficiency (time and space) of your solution.
 
 Question 1:
-A while loop was used instead of a recursive solution since it simplified the problem down to comparing two strings rather than creating a separate list, dictionary, or helper function. The only new variable created was the verify integer which has a maximum size of `len(t)`. The worst case scenario would be O(n-1) since the function would never actually iterate over the whole string since single characters are not accepted as palindromes.
+I used a while loop instead of a recursive solution since it simplified the problem down to comparing two strings rather than creating a separate list, dictionary, or helper function. The only new variable created was the verify integer which has a maximum size of `len(t)`. The worst case scenario would be O(n-1) since the function would never actually iterate over the whole string since single characters are not accepted as palindromes.
+
+
+Question 2:
+I used a recusive solution. It seemed like this is a situation where the processing time wouldn't be exponentially increased by recursion since n was continuously being reduced by either one or two characters each iteration while only checking if the first and last characters matched. The worst case scenario would be O(n) and space would be nil since no new variables were created.
 
