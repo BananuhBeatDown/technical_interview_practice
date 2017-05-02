@@ -14,53 +14,91 @@ Created on Wed Apr 26 13:40:27 2017
 
 
 def question1(s, t):
-    index = []
-    if not t or not s:
-        return False
-    elif len(t) > len(s):
-        return False
-    elif len(t) < 2:
-        return False
-    for i in t:
-        if i not in s:
-            return False
-        index.append(s.find(i))
-    index.sort()
-    if index == list(range(index[0], index[-1] + 1)):
-        return True
-    return False
+    if t and s:
+        if len(t) <= len(s):
+            if len(t) >= 2: 
+                for p in permutations(t):
+                    if p in s:
+                        return True
+                return False
+                        
+def permutations(s):
+    if len(s) == 1:
+        return s
+    recursive_perms = set()
+    for c in s:
+        for perm in permutations(s.replace(c,'',1)):
+            recursive_perms.add(c+perm)
+    return recursive_perms
 
+test_S = 'bccbba'
+test_T = 'abc'
+print(question1(test_S, test_T))
+# False
 
 test_S = 'udacity'
 test_T = 'ad'
 print(question1(test_S, test_T))
+# True
 
 test_S = 'udacity'
 test_T = 'aise'
 print(question1(test_S, test_T))
+# False
 
 test_S = 'udacity'
 test_T = 'yadciut'
 print(question1(test_S, test_T))
+# True
 
 test_S = 'udacity'
 test_T = None
 print(question1(test_S, test_T))
+# False
 
 test_S = 'udacity'
 test_T = ''
 print(question1(test_S, test_T))
+# False
 
 test_S = 'udacity'
 test_T = []
 print(question1(test_S, test_T))
+# False
 
 test_S = 'udacity'
 test_T = 'u'
 print(question1(test_S, test_T))
+# False
+
+test_S = 'bbcba'
+test_T = 'abc'
+print(question1(test_S, test_T))
+# True
 
 test_S = 'u'
 test_T = 'ud'
+print(question1(test_S, test_T))
+
+
+# %%
+
+def question1(s, t):
+    index = {}
+    if t and s:
+        if len(t) <= len(s):
+            if len(t) >= 2:
+                for i in set(t):
+                    if i not in s:
+                        return False
+                    else:
+                        index[i] = s.count(i)
+                return index
+    return False
+                         
+
+test_S = 'bccbba'
+test_T = 'abc'
 print(question1(test_S, test_T))
 
 # %%
