@@ -145,48 +145,123 @@ print(question2(test_a))
 # Vertices are represented as unique strings.
 # The function definition should be `question3(G)`.
 
-                                              
-def question3(G):
-    min_span_value = 0
-    key_values = []
-    
-    for values in G.values(): # get all values from all keys in one place
-        key_values += values
-    
-    for key in G.keys():
-        # print(key)
-        temp = 0 # temp value to hold span value
-        for value in key_values:
-            if key in value:
-                if temp == 0: # if no value assigned to temp, assign here
-                    temp = value[1]
-                    # print(temp)
-                elif value[1] < temp: # if value is less than current temp value replace it
-                    temp = value[1]
-                    # print(temp)    
-        min_span_value += temp # add key temp value to minimum span value 
-    return min_span_value
-                                             
 
-test_dict = {'A': [('B', 2)],
-             'B': [('A', 2), ('C', 5)],
-             'C': [('B', 5)]}
+def edges_parent_rank(G):
+    edges = []
+    parent = {}
+    rank = {}
+    for key in G.keys():
+        parent[key] = key
+        rank[key] = 0
+        for value in G[key]:
+            edges.append((value[1], key, value[0]))
+    edges.sort()
+    for i in range(len(edges) - 1):
+        j = 1
+        prev_len = len(edges)
+        while len(edges) == prev_len:
+            if i + j > len(edges) - 1:
+                break
+            if edges[i][0] in edges[i+j]:
+                if edges[i][1] in edges[i+j] and edges[i][2] in edges[i+j]:
+                    del edges[i + j]
+                else:
+                    j += 1
+    return edges, parent, rank
+
+
+def question3(G):
+    if G:
+        
+        def find(vert):
+            if parent[vert] != vert:
+                parent[vert] = find(parent[vert])      
+            return parent[vert]
+            
+        def union(vert1, vert2):
+            if find(vert1) != find(vert2):
+                if rank[vert1] <= rank[vert2]:
+                    rank[vert2] += 1
+                    parent[find(vert1)] = find(vert2)
+                else:
+                    parent[find(vert2)] = find(vert1)
+                    rank[vert1] += 1                          
+        
+        min_span_tree = set()
+        edges, parent, rank = edges_parent_rank(G)
+#        print(edges)
+#        print('')
+        for weight, vert1, vert2 in edges:
+#            print(rank)
+            # print(len(min_span_tree), len(edges) - 1)
+#            print(vert1, vert2)
+#            print(find(vert1), find(vert2))
+#            print(rank[find(vert1)], rank[find(vert2)])
+#            print([parent])
+#            print('')
+            if len(min_span_tree) != len(G) - 1:
+                if find(vert1) != find(vert2):
+                    min_span_tree.add((weight, vert1, vert2))
+                    union(vert1, vert2)
+    #                print((weight, vert1, vert2))
+    #                print('')
+                else:
+                    next
+                
+        G = G.fromkeys(G, [])
+        for key in G:
+            edges = []
+            for edge in min_span_tree:
+                if key == edge[1]:
+                    edges.append((edge[2], edge[0]))
+                else:
+                    if key == edge[2]:
+                        edges.append((edge[1], edge[0]))
+                    else:
+                        next
+            G[key] = edges
+        return G
+    return            
+            
+
+test_dict = {'A': [('B', 2), ('D', 1)],
+             'B': [('A', 2), ('C', 5), ('D', 1)],
+             'C': [('B', 5), ('D', 3)],
+             'D': [('A', 1), ('C', 3), ('B', 1)]
+             }
 print(question3(test_dict))
-# 9
+# {'A': [('D', 1)],
+#  'B': [('D', 1)],
+#  'C': [('D', 3)],
+#  'D': [('C', 3), ('B', 1), ('A', 1)]
+# }
 
 
 test_dict = {}
-
-
 print(question3(test_dict))
-# 0
+# None
 
-
-test_dict = {'A': [('B', 5), ('C', 2)],
-             'B': [('A', 2), ('C', 5)],
-             'C': [('A', 5), ('B', 2)]}
+test_dict = {'A': [('B', 4), ('H', 8)],
+             'B': [('A', 4), ('C', 8), ('H', 11)],
+             'C': [('B', 8), ('D', 7), ('F', 4), ('I', 2)],
+             'D': [('C', 7), ('E', 9), ('F', 14)],
+             'E': [('D', 9), ('F', 10)],
+             'F': [('E', 10), ('D', 14), ('C', 4), ('G', 2)],
+             'G': [('F', 2), ('I', 6), ('H', 1)],
+             'H': [('G', 1), ('I', 7), ('A', 8), ('B', 11)],
+             'I': [('H', 7), ('C', 2), ('G', 6)]      
+             }
 print(question3(test_dict))
-# 6
+# {'A': [('B', 4), ('H', 8)],
+#  'B': [('A', 4)],
+#  'C': [('F', 4), ('I', 2), ('D', 7)], 
+#  'H': [('A', 8), ('G', 1)],
+#  'E': [('D', 9)],
+#  'F': [('C', 4), ('G', 2)], 
+#  'I': [('C', 2)], 
+#  'D': [('C', 7), ('E', 9)], 
+#  'G': [('F', 2), ('H', 1)]
+#  }
 
 # %%
 
@@ -409,3 +484,4 @@ print(question5(ll, 1))
 
 print(question5(ll, 4))
 # 1
+
