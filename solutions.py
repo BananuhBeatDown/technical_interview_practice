@@ -151,37 +151,37 @@ def edges_parent_rank(G):
     parent = {}
     rank = {}
     for key in G.keys():
-        parent[key] = key
-        rank[key] = 0
+        parent[key] = key # create parent dict with vertices as keys and each vertice as its starter value
+        rank[key] = 0 # create a rank dict with vertices as keys and starter values of 0
         for value in G[key]:
             edges.append((value[1], key, value[0]))
     edges.sort()
-    for i in range(len(edges) - 1):
+    for i in range(len(edges) - 1): # filter out edges that are duplicates in connections
         j = 1
-        prev_len = len(edges)
+        prev_len = len(edges) # previous edges len to determine when a duplicate has been deleted
         while len(edges) == prev_len:
-            if i + j > len(edges) - 1:
+            if i + j > len(edges) - 1: # exit condition
                 break
-            if edges[i][0] in edges[i+j]:
-                if edges[i][1] in edges[i+j] and edges[i][2] in edges[i+j]:
-                    del edges[i + j]
+            if edges[i][0] in edges[i+j]: # check to see if weight in next edge 
+                if edges[i][1] in edges[i+j] and edges[i][2] in edges[i+j]: # check if vertices are in next edge
+                    del edges[i + j] # del next vertice if all three are true
                 else:
-                    j += 1
+                    j += 1 # if not all true move to next edge in list
     return edges, parent, rank
 
 
 def question3(G):
     if G:
         
-        def find(vert):
+        def find(vert): # keep iterating through parent dict until base vertice is found 
             if parent[vert] != vert:
                 parent[vert] = find(parent[vert])      
             return parent[vert]
             
-        def union(vert1, vert2):
+        def union(vert1, vert2): # determine who is going to be parent between two vertices
             if find(vert1) != find(vert2):
                 if rank[vert1] <= rank[vert2]:
-                    rank[vert2] += 1
+                    rank[vert2] += 1 # if parent, rank increase, prevents children from incorrectly being labelled as parents
                     parent[find(vert1)] = find(vert2)
                 else:
                     parent[find(vert2)] = find(vert1)
@@ -189,37 +189,25 @@ def question3(G):
         
         min_span_tree = set()
         edges, parent, rank = edges_parent_rank(G)
-#        print(edges)
-#        print('')
         for weight, vert1, vert2 in edges:
-#            print(rank)
-            # print(len(min_span_tree), len(edges) - 1)
-#            print(vert1, vert2)
-#            print(find(vert1), find(vert2))
-#            print(rank[find(vert1)], rank[find(vert2)])
-#            print([parent])
-#            print('')
-            if len(min_span_tree) != len(G) - 1:
-                if find(vert1) != find(vert2):
+            if len(min_span_tree) != len(G) - 1: # edges for min_span_tree = num_vertices - 1
+                if find(vert1) != find(vert2): # if match it means one or the other is the parent vertice
                     min_span_tree.add((weight, vert1, vert2))
                     union(vert1, vert2)
-    #                print((weight, vert1, vert2))
-    #                print('')
                 else:
                     next
                 
-        G = G.fromkeys(G, [])
-        for key in G:
-            edges = []
+        G = G.fromkeys(G, []) # clear out all values for keys in G 
+        for key in G: # returns the edges back into the original format
+            edges = [] # clear out all values in edges
             for edge in min_span_tree:
                 if key == edge[1]:
                     edges.append((edge[2], edge[0]))
+                elif key == edge[2]:
+                    edges.append((edge[1], edge[0]))
                 else:
-                    if key == edge[2]:
-                        edges.append((edge[1], edge[0]))
-                    else:
-                        next
-            G[key] = edges
+                    next
+            G[key] = edges # add edges to graph
         return G
     return            
             
@@ -240,6 +228,7 @@ print(question3(test_dict))
 test_dict = {}
 print(question3(test_dict))
 # None
+
 
 test_dict = {'A': [('B', 4), ('H', 8)],
              'B': [('A', 4), ('C', 8), ('H', 11)],
